@@ -6,6 +6,7 @@ import { AdminComponent } from './admin';
 import { Role } from './_models';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
+import { WallComponent } from './wall';
 
 const routes: Routes = [
     {
@@ -28,6 +29,7 @@ const routes: Routes = [
     },
     {
         path: 'wall',
+        component: WallComponent,
         canActivate: [AuthGuard]
     }
 ];
