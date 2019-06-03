@@ -1,3 +1,50 @@
-<p>
-  login works!
-</p>
+<mat-card class="login-card">
+    <mat-card-header class="justify-content-center text-center py-4">
+        <mat-card-title>Sign in</mat-card-title>
+        <mat-card-subtitle>to RGNL</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-context>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="px-lg-4 px-sm-3 pt-0">
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="text" formControlName="username" />
+                <mat-error *ngIf="f.username.errors">
+                    <div *ngIf="f.username.errors.required">Username is required</div>
+                    <div *ngIf="f.username.errors.email">Please enter a valid email</div>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="password" />
+                <mat-error *ngIf="f.password.errors">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                </mat-error>
+            </mat-form-field>
+
+
+
+            <mat-card-actions class="d-flex flex-column">
+                <div *ngIf="!loading" class="d-flex flex-column">
+                    <div class="d-flex justify-content-between">
+                        <a href="/register">Register</a>
+                        <button mat-raised-button [disabled]="loading" class="wave-effect px-4"
+                            color="primary">Login</button>
+                    </div>
+
+                    <div class="social-login py-4 pt-5 d-flex flex-column align-items-center justify-content-center">
+                        <p>or sign in with:</p>
+                        <button mat-raised-button class="btn-fb waves-light" matWavesEffect>
+                            <i class="fab fa-facebook-f left"></i> Facebook
+                        </button>
+                    </div>
+                </div>
+
+                <mat-spinner class="align-self-center py-5" *ngIf="loading"></mat-spinner>
+            </mat-card-actions>
+
+            <div *ngIf="error && !loading" class="alert alert-danger">{{error}}</div>
+        </form>
+    </mat-card-context>
+</mat-card>
