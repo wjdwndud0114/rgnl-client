@@ -26,6 +26,8 @@ export class RegisterComponent implements OnInit {
 
     ngOnInit () {
         this.registerForm = this.formBuilder.group({
+            firstname: ['', Validators.required],
+            lastname: ['', Validators.required],
             username: ['', [Validators.required, Validators.email]],
             password: ['', Validators.required]
         });
@@ -42,6 +44,7 @@ export class RegisterComponent implements OnInit {
             return;
         }
 
+        // TODO: change server to accept full User data, change UserService to accept User data
         this.loading = true;
         this.userService.create(this.f.username.value, this.f.password.value)
             .pipe(first())

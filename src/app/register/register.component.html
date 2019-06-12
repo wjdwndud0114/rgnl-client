@@ -1,11 +1,30 @@
 <mat-card class="register-card">
     <mat-card-header class="justify-content-center text-center py-4">
         <mat-card-title>Register</mat-card-title>
-        <mat-card-subtitle>to RGNL</mat-card-subtitle>
+        <mat-card-subtitle>create a RGNL account</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-context>
-        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="px-lg-4 px-sm-3 pt-0">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="px-lg-4 px-sm-3 pt-0 d-flex flex-column">
+
+            <div class="names d-flex justify-content-between">
+                <mat-form-field appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input matInput type="text" formControlName="firstname" />
+                    <mat-error *ngIf="f.firstname.errors">
+                        <div *ngIf="f.firstname.errors.required">First Name is required</div>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput type="text" formControlName="lastname" />
+                    <mat-error *ngIf="f.lastname.errors">
+                        <div *ngIf="f.lastname.errors.required">Last Name is required</div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
             <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
                 <input matInput type="text" formControlName="username" />
@@ -23,7 +42,7 @@
                 </mat-error>
             </mat-form-field>
 
-            <mat-card-actions class="d-flex flex-column">
+            <mat-card-actions class="d-flex flex-column justify-content-center mt-3">
                 <div *ngIf="!loading" class="d-flex flex-column">
                     <div class="d-flex justify-content-between">
                         <a href="/login">Have an existing account?</a>

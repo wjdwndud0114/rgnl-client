@@ -7,12 +7,12 @@
     min-height: 400px;
 }
 
-mat-form-field {
-    width: 100%;
-}
-
 mat-card-actions {
     margin: 0;
+}
+
+.names > mat-form-field {
+    width: 45%;
 }
 
 .mat-card-header .mat-card-title {
