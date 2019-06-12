@@ -19,12 +19,12 @@ export class UserService {
         return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
     }
 
-    create(user: User) {
-
+    create(username: string, password: string) {
+        return this.http.post<any>(`${environment.apiUrl}/users`, {'email': username, 'password': password});
     }
 
     update(user: User) {
-
+        return this.http.post<User>(`${environment.apiUrl}/users/${user.id}`, user)
     }
 
     delete(user: User) {

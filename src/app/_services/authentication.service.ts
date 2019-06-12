@@ -35,6 +35,7 @@ export class AuthenticationService {
     }
 
     logout() {
+        this.http.post<any>(`${environment.apiUrl}/token/revoke`, { "token": this.currentUserValue.accessToken });
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
     }

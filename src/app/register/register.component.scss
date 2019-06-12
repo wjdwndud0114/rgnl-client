@@ -1,0 +1,20 @@
+.register-card {
+    width: 90%;
+    max-width: 500px;
+    margin: auto;
+    margin-top: 15%;
+    height: auto;
+    min-height: 400px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+mat-card-actions {
+    margin: 0;
+}
+
+.mat-card-header .mat-card-title {
+    font-size: 30px;
+}
