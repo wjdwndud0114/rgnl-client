@@ -15,7 +15,7 @@ export class WallComponent implements OnInit, OnDestroy {
     changeDectorRef: ChangeDetectorRef,
     media: MediaMatcher
   ) {
-    this.mobileQuery = media.matchMedia('(max-width: 1200px');
+    this.mobileQuery = media.matchMedia('(max-width: 1023px');
     this._mobileQueryListener = () => changeDectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
   }

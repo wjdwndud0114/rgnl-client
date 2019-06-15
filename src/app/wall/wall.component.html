@@ -1,0 +1,18 @@
+<div class="wall-container">
+    <mat-toolbar color="primary">
+            <button *ngIf="mobileQuery.matches" mat-icon-button (click)="snav.toggle()">
+                <i *ngIf="!snav.opened" class="fas fa-bars fa-2x"></i>
+                <i *ngIf="snav.opened" class="fas fa-times fa-2x"></i>
+            </button>
+            <span class="ml-3">RGNL</span>
+    </mat-toolbar>
+
+    <mat-sidenav-container>
+        <mat-sidenav #snav [opened]="!mobileQuery.matches" [mode]="mobileQuery.matches ? 'over' : 'side'">
+            <span>Welcome!</span>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            CONTENT
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
