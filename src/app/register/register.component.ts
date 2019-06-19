@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
 
         // TODO: change server to accept full User data, change UserService to accept User data
         this.loading = true;
-        this.userService.create(this.f.username.value, this.f.password.value)
+        this.userService.create(this.f.username.value, this.f.password.value, this.f.firstname.value, this.f.lastname.value)
             .pipe(first())
             .subscribe(
                 data => {

@@ -6,6 +6,6 @@
 @import 'main-theme.scss';
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; top: 0; bottom: 0; right: 0; left: 0; position: absolute; }
 
 @include angular-material-theme($main-theme)
