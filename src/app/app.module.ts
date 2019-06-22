@@ -13,6 +13,7 @@ import { RegisterComponent } from './register/register.component';
 import { WallComponent } from './wall/wall.component';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { CustomMaterialModule } from './material.module';
+import { PostViewComponent } from './wall/post-view/post-view.component';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import { CustomMaterialModule } from './material.module';
         LoginComponent,
         RegisterComponent,
         WallComponent,
+        PostViewComponent,
     ],
     imports: [
         BrowserModule,
