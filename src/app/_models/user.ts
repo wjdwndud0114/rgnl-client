@@ -7,4 +7,6 @@ export class User {
     email: string;
     role: string;
     accessToken: accessToken;
+    followers: Array<User>;
+    followings: Array<User>;
 }

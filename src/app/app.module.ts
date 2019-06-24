@@ -13,7 +13,8 @@ import { RegisterComponent } from './register/register.component';
 import { WallComponent } from './wall/wall.component';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { CustomMaterialModule } from './material.module';
-import { PostViewComponent } from './wall/post-view/post-view.component';
+import { PostViewComponent } from './post-view/post-view.component';
+import { PostComponent } from './post/post.component';
 
 @NgModule({
     declarations: [
@@ -24,6 +25,7 @@ import { PostViewComponent } from './wall/post-view/post-view.component';
         RegisterComponent,
         WallComponent,
         PostViewComponent,
+        PostComponent,
     ],
     imports: [
         BrowserModule,
