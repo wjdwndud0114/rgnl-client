@@ -20,7 +20,7 @@ export class UserService {
     }
 
     create(username: string, password: string, firstname: string, lastname: string) {
-        return this.http.post<any>(`${environment.apiUrl}/users`, {'email': username, 'password': password, 'firstname': firstname, 'lastname': lastname});
+        return this.http.post<User>(`${environment.apiUrl}/users`, {'email': username, 'password': password, 'firstname': firstname, 'lastname': lastname});
     }
 
     update(user: User) {
