@@ -19,12 +19,16 @@ export class UserService {
         return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
     }
 
+    getGovUsers() {
+        return this.http.get<Array<User>>(`${environment.apiUrl}/users/gov`);
+    }
+
     create(username: string, password: string, firstname: string, lastname: string) {
         return this.http.post<User>(`${environment.apiUrl}/users`, {'email': username, 'password': password, 'firstname': firstname, 'lastname': lastname});
     }
 
     update(user: User) {
-        return this.http.post<User>(`${environment.apiUrl}/users/${user.id}`, user);
+        return this.http.post<User>(`${environment.apiUrl}/users/${user.Id}`, user);
     }
 
     delete(user: User) {

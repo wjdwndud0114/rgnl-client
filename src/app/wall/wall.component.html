@@ -5,6 +5,11 @@
                 <i *ngIf="snav.opened" class="fas fa-times fa-2x"></i>
             </button>
             <span class="ml-3">RGNL</span>
+            <div class="right">
+                <button (click)="signout()" mat-raised-button class="wave-effect px-2" color="accent">
+                    <i class="fas fa-power-off"></i>  Sign Out
+                </button>
+            </div>
     </mat-toolbar>
 
     <mat-sidenav-container>
@@ -12,8 +17,14 @@
             <span>Welcome!</span>
         </mat-sidenav>
         <mat-sidenav-content>
-            CONTENT
-            <app-post-view></app-post-view>
+            <mat-tab-group class="p-3">
+                <mat-tab label="Your Feed">
+                    <app-post-view [posts]="posts"></app-post-view>
+                </mat-tab>
+                <mat-tab label="Find Government Users">
+                    <app-gov-view></app-gov-view>
+                </mat-tab>
+            </mat-tab-group>
         </mat-sidenav-content>
     </mat-sidenav-container>
 </div>

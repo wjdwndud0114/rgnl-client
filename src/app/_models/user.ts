@@ -1,16 +1,16 @@
 import { accessToken } from './access-token';
-import { Post } from '.';
+import { Post, Follow } from '.';
 
 export class User {
-    id: number;
-    firstName: string;
-    lastName: string;
-    email: string;
-    role: string;
-    accessToken: accessToken;
-    modifiedDate: Date;
-    createdDate: Date;
-    posts: Array<Post>;
-    followers: Array<User>;
-    followings: Array<User>;
+    Id: number;
+    FirstName: string;
+    LastName: string;
+    Email: string;
+    Role: string;
+    ModifiedDate: Date;
+    CreatedDate: Date;
+    Posts: Array<Post>;
+    Followers: Array<Follow>;
+    Following: Array<Follow>;
+    AccessToken: accessToken;
 }

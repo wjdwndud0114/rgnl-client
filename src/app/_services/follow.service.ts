@@ -13,7 +13,7 @@ export class FollowService {
         private authenticationService: AuthenticationService) { }
 
     follow(id: number) {
-        return this.http.post(`${environment.apiUrl}/follow`, {"followedid": id, "followerid": this.authenticationService.currentUserValue.id});
+        return this.http.post(`${environment.apiUrl}/follow`, {"followedid": id, "followerid": this.authenticationService.currentUserValue.Id});
     }
 
     unfollow(id: number) {

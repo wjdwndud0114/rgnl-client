@@ -15,6 +15,8 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { CustomMaterialModule } from './material.module';
 import { PostViewComponent } from './post-view/post-view.component';
 import { PostComponent } from './post/post.component';
+import { GovViewComponent } from './gov-view/gov-view.component';
+import { GovCardComponent } from './gov-card/gov-card.component';
 
 @NgModule({
     declarations: [
@@ -26,6 +28,8 @@ import { PostComponent } from './post/post.component';
         WallComponent,
         PostViewComponent,
         PostComponent,
+        GovViewComponent,
+        GovCardComponent,
     ],
     imports: [
         BrowserModule,

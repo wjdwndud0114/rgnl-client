@@ -1,10 +1,10 @@
 import { User } from '.';
 
 export class Post {
-    id: number;
-    title: string;
-    content: string;
-    user: User;
-    modifiedDate: Date;
-    createdDate: Date;
+    Id: number;
+    Title: string;
+    Content: string;
+    User: User;
+    ModifiedDate: Date;
+    CreatedDate: Date;
 }

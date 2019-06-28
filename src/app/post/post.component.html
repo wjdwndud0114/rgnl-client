@@ -1,9 +1,8 @@
-<mat-card class="post-card">
+<mat-card class="post-card mb-3">
     <mat-card-header>
         <div mat-card-avatar class="post-avatar"></div>
-        <mat-card-title #title>{{post.title}}</mat-card-title>
-        <mat-card-subtitle #subtitle>{{post.createdDate}}</mat-card-subtitle>
+        <mat-card-title>{{post.Title}}</mat-card-title>
+        <mat-card-subtitle>{{post.User.FirstName}} {{post.User.LastName}} - {{post.CreatedDate}}</mat-card-subtitle>
     </mat-card-header>
-
-    <mat-card-content>{{post.content}}</mat-card-content>
+    <mat-card-content>{{post.Content}}</mat-card-content>
 </mat-card>

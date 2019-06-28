@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Post } from '@/_models';
+import { UserService } from '@/_services';
 
 @Component({
     selector: 'app-post-view',
@@ -7,38 +8,14 @@ import { Post } from '@/_models';
     styleUrls: ['./post-view.component.scss']
 })
 export class PostViewComponent implements OnInit {
-    posts: Array<Post>;
+    @Input() posts;
 
-    constructor () {
-        this.posts = [
-            {
-                id: 1,
-                title: "Post #1",
-                content: "Post content!!!!",
-                user: null,
-                modifiedDate: new Date(),
-                createdDate: new Date()
-            },
-            {
-                id: 2,
-                title: "Post #2",
-                content: "Post content!!!!",
-                user: null,
-                modifiedDate: new Date(),
-                createdDate: new Date()
-            },
-            {
-                id: 3,
-                title: "Post #3",
-                content: "Post content!!!!",
-                user: null,
-                modifiedDate: new Date(),
-                createdDate: new Date()
-            },
-        ]
-    }
+    constructor (
+        private userService: UserService
+    ) { }
 
     ngOnInit () {
+        
     }
 
 }
