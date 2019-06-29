@@ -34,4 +34,12 @@ export class UserService {
     delete(user: User) {
         
     }
+
+    follow(followedid: number, followerid: number) {
+        return this.http.post<any>(`${environment.apiUrl}/follow`, { "followedId": followedid, "followerId": followerid });
+    }
+
+    unfollow(govid: number) {
+        return this.http.delete<any>(`${environment.apiUrl}/follow/${govid}`);
+    }
 }

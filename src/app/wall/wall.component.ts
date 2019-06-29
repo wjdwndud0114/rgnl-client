@@ -12,13 +12,10 @@ import { Post, User } from '@/_models';
 })
 export class WallComponent implements OnInit, OnDestroy {
     mobileQuery: MediaQueryList;
-    posts: Array<Post>;
-    view: number;
 
     private _mobileQueryListener: () => void;
 
     constructor (
-        private userService: UserService,
         private authenticationService: AuthenticationService,
         private router: Router,
         private changeDectorRef: ChangeDetectorRef,
@@ -34,35 +31,12 @@ export class WallComponent implements OnInit, OnDestroy {
             this.router.navigate(["/login"]);
             return;
         }
-
-        this.authenticationService.subscribeToUser(this.refreshUserCallBack);
-        this.refreshUserCallBack(this.authenticationService.currentUserValue);
-    }
-
-    refreshUserCallBack = (user: User) => {
-        this.posts = [].concat(...user.Following.map(f => {
-            f.Followed.Posts.map(p => p.User = {
-                AccessToken: null,
-                Email: f.Followed.Email,
-                CreatedDate: f.Followed.CreatedDate,
-                FirstName: f.Followed.FirstName,
-                Followers: null,
-                Following: null,
-                Id: f.Followed.Id,
-                LastName: f.Followed.LastName,
-                ModifiedDate: f.Followed.ModifiedDate,
-                Posts: null,
-                Role: f.Followed.Role
-            });
-            return f.Followed.Posts;
-        }));
     }
 
     ngOnDestroy (): void {
         //Called once, before the instance is destroyed.
         //Add 'implements OnDestroy' to the class.
         this.mobileQuery.removeListener(this._mobileQueryListener);
-        this.authenticationService.unsubscribeToUser();
     }
 
     signout (): void {

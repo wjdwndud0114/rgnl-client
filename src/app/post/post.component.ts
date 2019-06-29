@@ -7,16 +7,11 @@ import { Post } from '@/_models';
     styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
-    post: Post;
+    @Input() post;
 
-    @Input() data;
-
-    constructor () {
-        
-    }
+    constructor () { }
 
     ngOnInit () {
-        this.post = this.data;
     }
 
 }
