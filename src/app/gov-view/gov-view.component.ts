@@ -17,11 +17,11 @@ export class GovViewComponent implements OnInit {
     updateGovernment = () => {
         this.userService.getGovUsers().subscribe(users => {
             console.log(users);
+            this.govs = users;
         });
     }
 
     ngOnInit () {
         this.updateGovernment();
     }
-
 }

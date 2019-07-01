@@ -35,8 +35,8 @@ export class UserService {
         
     }
 
-    follow(followedid: number, followerid: number) {
-        return this.http.post<any>(`${environment.apiUrl}/follow`, { "followedId": followedid, "followerId": followerid });
+    follow(followedid: number) {
+        return this.http.put<any>(`${environment.apiUrl}/follow/${followedid}`, {});
     }
 
     unfollow(govid: number) {

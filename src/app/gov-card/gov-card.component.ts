@@ -5,11 +5,11 @@ import { User } from '@/_models';
 @Component({
     selector: 'app-gov-card',
     templateUrl: './gov-card.component.html',
-    styleUrls: ['./gov-card.component.css']
+    styleUrls: ['./gov-card.component.scss']
 })
 export class GovCardComponent implements OnInit {
     @Input() gov: User;
-
+    isFollowing: boolean;
     loading: boolean;
 
     constructor (
@@ -18,14 +18,16 @@ export class GovCardComponent implements OnInit {
     ) { }
 
     ngOnInit () {
+        this.isFollowing = this.authenticationService.currentUserValue.Following.map(f => f.Followed.Id).includes(this.gov.Id);
     }
 
     followGovUser = () => {
         this.loading = true;
-        this.userService.follow(this.gov.Id, this.authenticationService.currentUserValue.Id)
+        this.userService.follow(this.gov.Id)
         .subscribe(
             data => {
                 this.loading = false;
+                this.isFollowing = true;
             },
             error => {
 
@@ -39,6 +41,7 @@ export class GovCardComponent implements OnInit {
         .subscribe(
             data => {
                this.loading = false; 
+                this.isFollowing = false;
             },
             error => {
 
