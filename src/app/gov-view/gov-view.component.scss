@@ -1,3 +1,11 @@
 .gov-view {
-    
+    display: flex;
+}
+
+.gov-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: auto;
+    max-width: 500px;
 }

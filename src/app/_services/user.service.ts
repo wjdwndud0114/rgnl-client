@@ -36,7 +36,7 @@ export class UserService {
     }
 
     follow(followedid: number) {
-        return this.http.put<any>(`${environment.apiUrl}/follow/${followedid}`, {});
+        return this.http.post<any>(`${environment.apiUrl}/follow/${followedid}`, {});
     }
 
     unfollow(govid: number) {

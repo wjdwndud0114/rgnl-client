@@ -1,5 +1,30 @@
 <div class="post-view p-2">
-    <div class="post-list" *ngFor="let post of posts">
-        <app-post [post]="post"></app-post>
+    <div class="create-post-wrapper mb-lg-4 mb-sm-2" *ngIf="canPost">
+        <form [formGroup]="postForm" (ngSubmit)="createPost()" class="px-3">
+            <mat-form-field appearance="outline">
+                <mat-label>Title</mat-label>
+                <input matInput type="text" formControlName="title" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Content</mat-label>
+                <textarea matInput type="text" formControlName="content"></textarea>
+            </mat-form-field>
+
+            <div class="actions d-flex flex-column justifty-content-center">
+                <div *ngIf="!loading" class="d-flex flex-column">
+                    <button mat-raised-button [disabled]="loading" class="wave-effect px-4"
+                        color="primary">Post</button>
+                </div>
+
+                <mat-spinner class="align-self-center py-5" *ngIf="loading"></mat-spinner>
+            </div>
+        </form>
+    </div>
+
+    <div class="post-list-wrapper">
+        <div class="post-list" *ngFor="let post of posts">
+            <app-post [post]="post"></app-post>
+        </div>
     </div>
 </div>

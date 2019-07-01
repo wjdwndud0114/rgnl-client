@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/wall';
     }
 
-    get f() { return this.loginForm.controls }
+    get f() { return this.loginForm.controls; }
 
     onSubmit() {
         this.submitted = true;

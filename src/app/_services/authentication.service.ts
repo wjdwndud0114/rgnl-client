@@ -68,7 +68,7 @@ export class AuthenticationService {
     }
 
     subscribeToUser (callBack) {
-        this.userSubscription = interval(5000).subscribe(
+        this.userSubscription = interval(1000).subscribe(
             val => {
                 this.refreshUser().pipe(first()).subscribe(
                     data => {
