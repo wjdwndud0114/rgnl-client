@@ -12,6 +12,7 @@ import { first } from 'rxjs/operators';
 export class PostComponent implements OnInit {
     @Input() post: Post;
 
+    removed: boolean = false;
     editForm: FormGroup;
     isEditing: boolean = false;
     loading: boolean = false;
@@ -49,10 +50,17 @@ export class PostComponent implements OnInit {
     }
 
     cancel () {
-
+        this.isEditing = false;
+        this.editForm.controls.title.setValue(this.post.Title);
+        this.editForm.controls.content.setValue(this.post.Content);
     }
 
     delete () {
-        this.postService.delete(this.post.Id);
+        this.loading = true;
+        this.postService.delete(this.post.Id).subscribe(
+            data => {
+                this.removed = true;
+            }
+        );
     }
 }

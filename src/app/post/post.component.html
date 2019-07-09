@@ -1,13 +1,34 @@
-<mat-card class="post-card mb-3">
+<mat-card *ngIf="!removed" class="post-card mb-3">
     <div *ngIf="!isEditing" class="post-wrapper">
         <mat-card-header>
             <div mat-card-avatar class="post-avatar"></div>
             <mat-card-title>{{post.Title}}</mat-card-title>
+
+            <mat-menu #optMenu="matMenu">
+                <button mat-menu-item (click)="edit=true">Edit</button>
+                <button mat-menu-item (click)="delete()">Delete</button>
+            </mat-menu>
+
+            <button mat-icon-button [matMenuTriggerFor]="optMenu">
+                <i class="fas fa-ellipsis-v"></i>
+            </button>
+
             <mat-card-subtitle>{{post.User.FirstName}} {{post.User.LastName}} - {{post.CreatedDate}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>{{post.Content}}</mat-card-content>
     </div>
     <div *ngIf="isEditing" class="post-edit-wrapper">
-        
+        <form [formGroup]="editForm" (ngSubmit)="saveChanges()" class="">
+            <mat-card-header>
+                <input matInput placeholder="Title" type="text" formControlName="title" value="post.Title" />
+            </mat-card-header>
+            <mat-card-content>
+                <textarea matInput placeholder="Content" type="text" formControlNmae="content" value="post.Content"></textarea>
+            </mat-card-content>
+            <mat-card-actions class="d-flex flex-row justify-content-center align-items-center">
+                <button mat-raised button [disabled]="loading" class="wave-effect px-2" color="primary">Save</button>
+                <button mat-raised button [disabled]="loading" class="wave-effect px-2" (click)="cancel()" color="accent">Cancel</button>
+            </mat-card-actions>
+        </form>
     </div>
 </mat-card>
