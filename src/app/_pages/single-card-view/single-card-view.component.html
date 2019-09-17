@@ -1,0 +1,5 @@
+<div class="card-container" [ngSwitch]="currentView">
+    <app-login *ngSwitchCase="'login'"></app-login>
+    <app-register *ngSwitchCase="'register'"></app-register>
+    <app-profile *ngSwitchCase="'profile'"></app-profile>
+</div>
