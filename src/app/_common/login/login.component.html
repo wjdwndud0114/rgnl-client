@@ -1,17 +1,17 @@
 <mat-card class="login-card">
-    <div class="logo">
+    <div fxLayoutAlign="center center" class="logo">
         <img src="assets/logo.png" />
     </div>
-    <mat-card-header>
-        <mat-card-title>Sign in</mat-card-title>
+    <mat-card-header fxLayoutAlign="center center">
+        <mat-card-title fxLayoutAlign="center center">Sign in</mat-card-title>
         <mat-card-subtitle>with your RGNL account</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>
-        <form [formGroup]="loginForm" (ngSubmit)="login()"> 
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
             <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
-                <input matInput type="text" formControlName="username" />
+                <input matInput type="text" class="large-font" formControlName="username" />
                 <mat-error *ngIf="f.username.errors">
                     <div *ngIf="f.username.errors.required">Username is required</div>
                     <div *ngIf="f.username.errors.email">Please enter a valid email</div>
@@ -20,7 +20,7 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
-                <input matInput type="password" formControlName="password" />
+                <input matInput type="password" class="large-font" formControlName="password" />
                 <mat-error *ngIf="f.password.errors">
                     <div *ngIf="f.password.errors.required">Password is required</div>
                 </mat-error>
@@ -30,15 +30,16 @@
 
             <mat-card-actions>
                 <div *ngIf="!loading">
-                    <div class="d-flex justify-content-between">
+                    <div fxLayoutAlign="space-between start" class="large-font">
                         <a href="/register">Register</a>
-                        <button mat-raised-button [disabled]="loading" class="wave-effect"
-                            color="primary">Login</button>
+                        <button mat-raised-button type="submit" [disabled]="loading"
+                            class="wave-effect login-button large-font" color="primary">Login</button>
                     </div>
 
-                    <div class="social-login">
+                    <div class="social-login" fxLayout="column" fxLayoutGap="gappx" fxLayoutAlign="center center">
                         <p>or sign in with:</p>
-                        <button mat-raised-button class="btn-fb waves-light" matWavesEffect>
+                        <button mat-raised-button type="button" class="btn-fb waves-light" (click)="fbLogin($event)"
+                            matWavesEffect>
                             <i class="fab fa-facebook-f left"></i> Facebook
                         </button>
                     </div>
@@ -47,7 +48,7 @@
                 <mat-spinner *ngIf="loading"></mat-spinner>
             </mat-card-actions>
 
-            <div *ngIf="error && !loading" class="alert alert-danger">{{error}}</div>
+            <div *ngIf="error && !loading" class="growler error">{{error}}</div>
         </form>
     </mat-card-content>
 </mat-card>
