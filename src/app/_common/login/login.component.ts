@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DataService } from 'src/app/_services/data.service';
 import { UserService } from 'src/app/_services/user.service';
-import { first, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit () {
     this.loginForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required, Validators.email, Validators.maxLength(256)]],
       password: ['', Validators.required]
     });
 
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     .subscribe(
       user => {
         if (user) {
-          this.router.navigate([this.returnUrl]);
+          this.router.navigateByUrl(this.returnUrl);
         }
       }
     );
@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   handleLoginFail = (error) => {
-    this.error = error.login_failure[0] || '';
+    this.error = Object.values(error).join('\n');
     this.loading = false;
   }
 

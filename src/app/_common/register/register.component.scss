@@ -1,0 +1,32 @@
+mat-form-field {
+    width: 100%;
+}
+mat-card-actions {
+    margin: 0;
+}
+mat-card-title {
+    margin-top: 14px;
+}
+mat-form-field {
+    margin-bottom: 10px;
+}
+mat-card-content {
+    padding-bottom: 15px;
+}
+
+.names > mat-form-field {
+    width: 45%;
+}
+.mat-card-header .mat-card-title {
+    font-size: 35px;
+}
+
+.logo > img {
+    margin: -20px 0 -40px 0;
+    width: 100px;
+}
+
+.register-button {
+    min-width: 99px;
+    width: 130px;
+}

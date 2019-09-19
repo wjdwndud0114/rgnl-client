@@ -45,4 +45,8 @@ export class UserService {
       }
     );
   }
+
+  register = (email: string, password: string, firstName: string, lastName: string, govAccount: boolean = false) => {
+    return this.http.post(`${this.baseUrl}/api/accounts/${govAccount ? 'gov' : ''}`, { email, password, firstName, lastName });
+  }
 }
