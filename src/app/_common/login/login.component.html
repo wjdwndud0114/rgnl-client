@@ -32,7 +32,7 @@
                 <div *ngIf="!loading">
                     <div fxLayoutAlign="space-between start" class="large-font">
                         <a href="/register">Register</a>
-                        <button mat-raised-button type="submit" [disabled]="loading"
+                        <button mat-raised-button type="submit" [disabled]="loading || (fbWindow && fbWindow.open)"
                             class="wave-effect login-button large-font" color="primary">Login</button>
                     </div>
 

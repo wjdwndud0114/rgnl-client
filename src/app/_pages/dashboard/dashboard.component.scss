@@ -1,0 +1,29 @@
+.wall-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+ mat-sidenav-container {
+        display: flex;
+        height: 100%;
+
+        mat-sidenav {
+            min-width: 250px;
+            max-width: 350px;
+            width: 33%;
+        }
+
+        mat-sidenav-content {
+            display: flex;
+            flex: 1 1 auto;
+
+            mat-tab-group {
+                flex: 1 1 auto;
+            }
+        }
+    }

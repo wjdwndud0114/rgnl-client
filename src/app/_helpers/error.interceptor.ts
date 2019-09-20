@@ -16,7 +16,11 @@ export class ErrorInterceptor implements HttpInterceptor {
                 location.reload(true);
             }
 
-            const error = err.error || err.statusText;
+            let error = err.error || err.statusText;
+            if (err.status === 0 || err.status === 404) {
+                error = {message: err.message};
+            }
+
             return throwError(error);
         }));
     }

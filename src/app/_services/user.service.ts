@@ -3,6 +3,8 @@ import { DataService } from './data.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { User, LoginResult } from '../_models';
+import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,7 @@ export class UserService {
   constructor(
     private data: DataService,
     private http: HttpClient,
+    private router: Router,
   ) { }
 
   login = (username: string, password: string, failHandler) => {
@@ -20,7 +23,6 @@ export class UserService {
     .subscribe(
       loginResult => {
         this.data.setAuthToken(loginResult.AuthToken);
-
         this.getUser();
       },
       error => {
@@ -30,8 +32,24 @@ export class UserService {
     );
   }
 
+  facebookLogin = (accessToken: string, failHandler) => {
+    this.http.post<LoginResult>(`${this.baseUrl}/api/externalauth/Facebook`, { accessToken })
+    .subscribe(
+      loginResult => {
+        this.data.setAuthToken(loginResult.AuthToken);
+        this.getUser();
+        return true;
+      },
+      error => {
+        console.log('Facebook Login failed: ', error);
+        failHandler(error);
+      }
+    );
+  }
+
   logout = () => {
     this.data.removeAuthToken();
+    this.router.navigateByUrl('/');
   }
 
   getUser = () => {

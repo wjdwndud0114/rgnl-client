@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, Router } from '@angular/router';
 import { LandingComponent } from './_pages/landing/landing.component';
 import { SingleCardViewComponent } from './_pages/single-card-view/single-card-view.component';
 import { DashboardComponent } from './_pages/dashboard/dashboard.component';
 import { AdminDashboardComponent } from './_pages/admin-dashboard/admin-dashboard.component';
+import { AuthGuard } from './_guards/auth.guard';
 
 
 const routes: Routes = [
@@ -24,10 +25,14 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    data: { roles: ['producer', 'consumer', 'admin'] },
+    canActivate: [AuthGuard]
   },
   {
     path: 'admin',
     component: AdminDashboardComponent,
+    data: { roles: ['admin'] },
+    canActivate: [AuthGuard]
   },
 ];
 
@@ -35,4 +40,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

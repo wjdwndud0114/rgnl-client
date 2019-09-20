@@ -5,6 +5,7 @@ import { DataService } from 'src/app/_services/data.service';
 import { UserService } from 'src/app/_services/user.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,8 @@ import { Subject } from 'rxjs';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   private destroyed: Subject<void> = new Subject<void>();
+  fbWindow: Window;
+  fbRedirectBase = 'http://localhost:4200';
   loginForm: FormGroup;
   loading = false;
   returnUrl: string;
@@ -26,7 +29,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router,
     private data: DataService,
     private userService: UserService,
-  ) { }
+  ) {
+    if (window.addEventListener) {
+      window.addEventListener('message', this.handleMessage, false);
+    } else {
+      (window as any).attachEvent('onmessage', this.handleMessage);
+    }
+  }
 
   ngOnInit () {
     this.loginForm = this.formBuilder.group({
@@ -46,8 +55,35 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy () {
+    if (window.removeEventListener) {
+      window.removeEventListener('message', this.handleMessage, false);
+    } else {
+      (window as any).removeEvent('onmessage', this.handleMessage);
+    }
+
     this.destroyed.next();
     this.destroyed.complete();
+  }
+
+  fbLogin () {
+    this.fbWindow = window.open(`https://www.facebook.com/v2.11/dialog/oauth?&response_type=token&display=popup&client_id=${environment.fbClient}&display=popup&redirect_uri=${window.location.origin}/facebook-auth.html&scope=email`, null, 'width=600,height=400');
+  }
+
+  handleMessage = (event: Event) => {
+    const message = event as MessageEvent;
+    // Only trust messages from the below origin.
+    if (message.origin !== window.location.origin ||
+      typeof(message.data) !== 'string') { return; }
+
+    this.fbWindow.close();
+
+    const result = JSON.parse(message.data);
+    if (!result.status) {
+      this.error = result.error + ': ' + result.errorDescription;
+    } else {
+      this.loading = true;
+      this.userService.facebookLogin(result.accessToken, this.handleLoginFail);
+    }
   }
 
   login () {
@@ -62,10 +98,5 @@ export class LoginComponent implements OnInit, OnDestroy {
   handleLoginFail = (error) => {
     this.error = Object.values(error).join('\n');
     this.loading = false;
-  }
-
-  fbLogin(event) {
-    // TODO: FB login
-    console.log(event);
   }
 }

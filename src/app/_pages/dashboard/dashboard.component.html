@@ -1,1 +1,24 @@
-<p>dashboard works!</p>
+<div class="wall-container">
+    <mat-toolbar color="primary">
+        <div fxLayoutAlign="space-between center" class="container">
+            <button *ngIf="mobileQuery.matches" mat-icon-button (click)="snav.toggle()">
+                <i *ngIf="!snav.opened" class="fas fa-bars fa-2x"></i>
+                <i *ngIf="snav.opened" class="fas fa-times fa-2x"></i>
+            </button>
+            <span>RGNL</span>
+            <div>
+                <button (click)="signout()" mat-raised-button class="wave-effect px-2" color="accent">
+                    <i class="fas fa-power-off"></i>  Sign Out
+                </button>
+            </div>
+        </div>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="container">
+        <mat-sidenav #snav [opened]="!mobileQuery.matches" [mode]="mobileQuery.matches ? 'over' : 'side'">
+            <span>Welcome!</span>
+        </mat-sidenav>
+        <mat-sidenav-content>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

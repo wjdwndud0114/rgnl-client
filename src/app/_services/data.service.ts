@@ -20,9 +20,21 @@ export class DataService {
     authToken: null,
   };
 
-  constructor () { }
+  constructor () {
+    const token = sessionStorage.getItem('authToken');
+    if (token) {
+      this.setAuthToken(token);
+    }
+    const user = JSON.parse(sessionStorage.getItem('user')) as User;
+    if (user) {
+      this.setUser(user);
+    }
+  }
 
   public setUser (user: User) {
+    if (!this.dataStore.user || this.dataStore.user.Id !== user.Id) {
+      sessionStorage.setItem('user', JSON.stringify(user));
+    }
     this.dataStore.user = user;
     this._user.next(this.dataStore.user);
   }
@@ -30,6 +42,7 @@ export class DataService {
   public setAuthToken (authToken: string) {
     this.dataStore.authToken = authToken;
     this._authToken.next(this.dataStore.authToken);
+    sessionStorage.setItem('authToken', authToken);
   }
 
   public removeAuthToken () {
@@ -37,5 +50,7 @@ export class DataService {
     this._user.next(this.dataStore.user);
     this.dataStore.authToken = null;
     this._authToken.next(this.dataStore.authToken);
+    sessionStorage.removeItem('authToken');
+    sessionStorage.removeItem('user');
   }
 }
