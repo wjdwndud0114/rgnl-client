@@ -17,7 +17,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             }
 
             let error = err.error || err.statusText;
-            if (err.status === 0 || err.status === 404) {
+            if ([0, 404, 500].some(status => err.status === status)) {
                 error = {message: err.message};
             }
 

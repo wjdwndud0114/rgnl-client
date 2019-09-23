@@ -1,1 +1,141 @@
-<p>profile works!</p>
+<mat-card class="profile-card">
+    <mat-card-header fxLayoutAlign="center center">
+        <mat-card-title fxLayoutAlign="center center">Profile</mat-card-title>
+        <mat-card-subtitle>Your personal information</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+        <form *ngIf="isEditMode; else info" [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+
+            <mat-form-field [style.display]="isProducer ? 'block' : 'none'" appearance="outline">
+                <mat-label>Short Description</mat-label>
+                <textarea rows="2" matInput type="text" formControlName="shortDescription"
+                    value="{{user.Profile && user.Profile.ShortDescription}}"></textarea>
+                <mat-error *ngIf="f.shortDescription.errors">
+                    <div *ngIf="f.shortDescription.errors.maxlength">Cannot exceed 300 characters</div>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field [style.display]="isProducer ? 'block' : 'none'" appearance="outline">
+                <mat-label>Long Description</mat-label>
+                <textarea rows="4" matInput type="text" formControlName="longDescription"
+                    value="{{user.Profile && user.Profile.LongDescription}}"></textarea>
+            </mat-form-field>
+
+            <mat-form-field [style.display]="isProducer ? 'block' : 'none'" appearance="outline">
+                <mat-label>Tags</mat-label>
+                <input matInput type="text" formControlName="tags" value="{{user.Profile && user.Profile.Tags}}" />
+            </mat-form-field>
+
+            <mat-form-field [style.display]="isProducer ? 'block' : 'none'" appearance="outline">
+                <mat-label>Website</mat-label>
+                <input matInput type="text" formControlName="url" value="{{user.Profile && user.Profile.Url}}" />
+            </mat-form-field>
+
+            <mat-form-field [style.display]="isProducer ? 'block' : 'none'" appearance="outline">
+                <mat-label>Street</mat-label>
+                <input matInput type="text" formControlName="street" value="{{user.Profile && user.Profile.Street}}" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>City</mat-label>
+                <input matInput type="text" formControlName="city" value="{{user.Profile && user.Profile.City}}" />
+                <mat-error *ngIf="f.city.errors">
+                    <div *ngIf="f.city.errors.required">City is required</div>
+                </mat-error>
+            </mat-form-field>
+
+            <div fxLayoutAlign="space-between center" class="state-zip">
+                <mat-form-field appearance="outline">
+                    <mat-label>State</mat-label>
+                    <input matInput type="text" formControlName="state" [matAutocomplete]="stateAuto"
+                        value="{{user.Profile && user.Profile.State}}" />
+                    <mat-error *ngIf="f.state.errors">
+                        <div *ngIf="f.state.errors.required">State is required</div>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-autocomplete #stateAuto="matAutocomplete">
+                    <mat-option *ngFor="let state of filteredStates | async" [value]="state">{{state}}</mat-option>
+                </mat-autocomplete>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Zip</mat-label>
+                    <input matInput type="text" formControlName="zip" value="{{user.Profile && user.Profile.Zip}}" />
+                    <mat-error *ngIf="f.zip.errors">
+                        <div *ngIf="f.zip.errors.required">Zip is required</div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <mat-card-actions>
+                <div *ngIf="!loading" fxLayout="row" fxLayoutAlign="space-between center">
+                    <button [style.visibility]="user.Profile ? 'visible' : 'hidden'" mat-raised-button
+                        [disabled]="loading" type="button" class="wave-effect large-font button" color="warn"
+                        (click)="isEditMode = false">Canel</button>
+                    <button mat-raised-button [disabled]="loading" type="submit" class="wave-effect large-font button"
+                        color="primary">Save</button>
+                </div>
+
+                <mat-spinner *ngIf="loading"></mat-spinner>
+            </mat-card-actions>
+
+            <div *ngIf="error && !loading" class="growler error">{{error}}</div>
+        </form>
+
+        <ng-template #info>
+            <div fxLayout="column" fxLayoutGap="15px">
+                <div [style.display]="isProducer ? 'block' : 'none'" fxLayout="column">
+                    <label>Short Description</label>
+                    <span>{{user.Profile && user.Profile.ShortDescription}}</span>
+                </div>
+
+                <div [style.display]="isProducer ? 'block' : 'none'" fxLayout="column">
+                    <label>Long Description</label>
+                    <span>{{user.Profile && user.Profile.LongDescription}}</span>
+                </div>
+
+                <div [style.display]="isProducer ? 'block' : 'none'" fxLayout="column">
+                    <label>Tags</label>
+                    <span>{{user.Profile && user.Profile.Tags}}</span>
+                </div>
+
+                <div [style.display]="isProducer ? 'block' : 'none'" fxLayout="column">
+                    <label>Website</label>
+                    <span>{{user.Profile && user.Profile.Website}}</span>
+                </div>
+
+                <div [style.display]="isProducer ? 'block' : 'none'" fxLayout="column">
+                    <label fxFlex="1 1 auto">Street</label>
+                    <span>{{user.Profile && user.Profile.Street}}</span>
+                </div>
+
+                <div fxLayout="column">
+                    <label>City</label>
+                    <span>{{user.Profile && user.Profile.City}}</span>
+                </div>
+
+                <div fxLayout="row" fxLayoutGap="15px">
+                    <div fxLayout="column">
+                        <label>State</label>
+                        <span>{{user.Profile && user.Profile.State}}</span>
+                    </div>
+                    <div fxLayout="column">
+                        <label>Zip</label>
+                        <span [textContent]="user.Profile && user.Profile.Zip"></span>
+                    </div>
+                </div>
+            </div>
+
+            <mat-card-actions>
+                <div fxLayout="row" fxLayoutAlign="end center">
+                    <button mat-raised-button type="button" class="wave-effect large-font button" color="primary"
+                        (click)="isEditMode = true; f.state.setValue(user.Profile.State)">Edit</button>
+                </div>
+
+                <mat-spinner *ngIf="loading"></mat-spinner>
+            </mat-card-actions>
+        </ng-template>
+
+    </mat-card-content>
+</mat-card>

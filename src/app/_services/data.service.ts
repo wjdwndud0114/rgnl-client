@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../_models/user';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -32,9 +33,7 @@ export class DataService {
   }
 
   public setUser (user: User) {
-    if (!this.dataStore.user || this.dataStore.user.Id !== user.Id) {
-      sessionStorage.setItem('user', JSON.stringify(user));
-    }
+    sessionStorage.setItem('user', JSON.stringify(user));
     this.dataStore.user = user;
     this._user.next(this.dataStore.user);
   }

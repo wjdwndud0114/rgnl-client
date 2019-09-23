@@ -11,19 +11,10 @@
  mat-sidenav-container {
         display: flex;
         height: 100%;
+        background: #fff;
 
         mat-sidenav {
-            min-width: 250px;
-            max-width: 350px;
+            min-width: 300px;
             width: 33%;
-        }
-
-        mat-sidenav-content {
-            display: flex;
-            flex: 1 1 auto;
-
-            mat-tab-group {
-                flex: 1 1 auto;
-            }
         }
     }

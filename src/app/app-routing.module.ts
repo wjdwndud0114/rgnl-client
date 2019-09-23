@@ -23,6 +23,12 @@ const routes: Routes = [
     data: { card: 'register' }
   },
   {
+    path: 'profile',
+    component: SingleCardViewComponent,
+    data: { card: 'profile', roles: ['producer', 'consumer', 'admin'] },
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'dashboard',
     component: DashboardComponent,
     data: { roles: ['producer', 'consumer', 'admin'] },

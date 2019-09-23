@@ -4,7 +4,7 @@ import {
     MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
     MatToolbarModule, MatMenuModule, MatProgressSpinnerModule, MatSidenavModule,
     MatSlideToggleModule, MatSliderModule, MatButtonToggleModule, MatDividerModule,
-    MatTabsModule,
+    MatTabsModule, MatAutocompleteModule,
 } from '@angular/material';
 
 @NgModule({
@@ -25,6 +25,7 @@ import {
     MatButtonToggleModule,
     MatDividerModule,
     MatTabsModule,
+    MatAutocompleteModule,
   ],
   exports: [
     CommonModule,
@@ -42,6 +43,7 @@ import {
     MatButtonToggleModule,
     MatDividerModule,
     MatTabsModule,
+    MatAutocompleteModule,
   ]
 })
 export class MaterialModule { }

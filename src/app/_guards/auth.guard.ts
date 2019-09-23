@@ -17,7 +17,6 @@ export class AuthGuard implements CanActivate {
       user => {
         if (user) {
           // check if route is restricted by role
-          console.log(route.data.roles, user.Roles)
           if (route.data.roles && user.Roles.some(role => route.data.roles.indexOf(role.Role.Name) !== -1)) {
             return true;
           }

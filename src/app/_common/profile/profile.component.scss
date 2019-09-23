@@ -1,0 +1,33 @@
+mat-form-field {
+    width: 100%;
+}
+mat-card-actions {
+    margin: 0;
+}
+mat-card-content {
+    padding-bottom: 15px;
+}
+
+.profile-card {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.mat-card-header .mat-card-title {
+    font-size: 35px;
+}
+
+.state-zip > mat-form-field {
+    width: 47%;
+}
+
+.button {
+    min-width: 99px;
+    width: 130px;
+}
+
+label {
+    display: flex;
+    font-weight: bolder;
+    font-size: 110%; 
+}

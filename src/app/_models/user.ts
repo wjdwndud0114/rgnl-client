@@ -1,5 +1,6 @@
 import { UserRole } from './user-role';
 import { Relationship } from './relationship';
+import { Profile } from './profile';
 
 export interface User {
     Id: number;
@@ -12,4 +13,5 @@ export interface User {
     Followers: Relationship[];
     Following: Relationship[];
     Roles: UserRole[];
+    Profile: Profile;
 }
