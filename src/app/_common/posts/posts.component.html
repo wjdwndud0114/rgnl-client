@@ -1,0 +1,41 @@
+<div fxLayout="column" fxLayoutGap="15px" class="posts-container">
+    <mat-card fx-Flex="1 1 auto" class="create-card" *ngIf="isProducer">
+        <mat-card-header fxLayoutAlign="start center">
+            <mat-card-title fxLayoutAlign="start center">Create a post</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="postForm" #formDirective="ngForm" (ngSubmit)="createPost()" fxLayout="column" fxLayoutAlign="center center">
+                <mat-form-field appearance="outline">
+                    <mat-label>Title</mat-label>
+                    <input matInput type="text" class="large-font" formControlName="title" />
+                    <mat-error *ngIf="f.title.errors">
+                        <div *ngIf="f.title.errors.required">Title is required</div>
+                        <div *ngIf="f.title.errors.maxlength">Title cannot exceed 100 characters</div>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Content</mat-label>
+                    <textarea matInput type="text" class="large-font" formControlName="content" rows="3"></textarea>
+                    <mat-error *ngIf="f.content.errors">
+                        <div *ngIf="f.content.errors.required">Content is required</div>
+                        <div *ngIf="f.content.errors.content">Please enter a valid content</div>
+                        <div *ngIf="f.content.errors.maxlength">Content exceeds the maximum length</div>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-card-actions>
+                    <div *ngIf="!loading" fxLayout="row" fxLayoutAlign="end center">
+                        <button mat-raised-button [disabled]="loading" type="submit" class="wave-effect large-font button"
+                            color="primary">Post</button>
+                    </div>
+                </mat-card-actions>
+
+                <div *ngIf="error && !loading" class="growler error">{{error}}</div>
+            </form>
+
+        </mat-card-content>
+    </mat-card>
+
+    <app-post *ngFor="let post of posts" [post]="post"></app-post>
+</div>

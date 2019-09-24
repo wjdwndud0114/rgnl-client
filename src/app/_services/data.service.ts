@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../_models/user';
-import { UserService } from './user.service';
+import { Post } from '../_models';
 
 @Injectable({
   providedIn: 'root'
@@ -9,16 +9,24 @@ import { UserService } from './user.service';
 export class DataService {
   private _user: BehaviorSubject<User> = new BehaviorSubject(null);
   private _authToken: BehaviorSubject<string> = new BehaviorSubject(null);
+  private _posts: BehaviorSubject<Post[]> = new BehaviorSubject(null);
+  private _followed: BehaviorSubject<User[]> = new BehaviorSubject(null);
 
   public get user () { return this._user.asObservable(); }
   public get authToken () { return this._authToken.asObservable(); }
+  public get posts () { return this._posts.asObservable(); }
+  public get followed () { return this._followed.asObservable(); }
 
   private dataStore: {
     user: User,
     authToken: string,
+    posts: Post[],
+    followed: User[],
   } = {
     user: null,
     authToken: null,
+    posts: null,
+    followed: null,
   };
 
   constructor () {
@@ -51,5 +59,31 @@ export class DataService {
     this._authToken.next(this.dataStore.authToken);
     sessionStorage.removeItem('authToken');
     sessionStorage.removeItem('user');
+  }
+
+  public setPosts (posts: Post[]) {
+    this.dataStore.posts = posts;
+    this._posts.next(this.dataStore.posts);
+  }
+
+  public addPost (post: Post) {
+    this.dataStore.posts.unshift(post);
+    this._posts.next(this.dataStore.posts);
+  }
+
+  public removePost (post: Post) {
+    this.dataStore.posts.splice(this.dataStore.posts.indexOf(post), 1);
+    this._posts.next(this.dataStore.posts);
+  }
+
+  public updatePost (post: Post) {
+    const i = this.dataStore.posts.findIndex(p => p.PostId === post.PostId);
+    this.dataStore.posts[i] = post;
+    this._posts.next(this.dataStore.posts);
+  }
+
+  public setFollowed (followed: User[]) {
+    this.dataStore.followed = followed;
+    this._followed.next(this.dataStore.followed);
   }
 }

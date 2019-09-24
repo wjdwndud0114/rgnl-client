@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { User, LoginResult, Profile } from '../_models';
+import { User, LoginResult, Profile, Post } from '../_models';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 
@@ -89,5 +89,33 @@ export class UserService {
           failHandler(error);
         }
       );
+  }
+
+  createPost = (post: Post) => {
+    return this.http.post(`${this.baseUrl}/odata/Post`, post);
+  }
+
+  getPosts = () => {
+    this.http.get<Post[]>(`${this.baseUrl}/api/dashboard/posts`)
+      .subscribe(
+        posts => {
+          this.data.setPosts(posts);
+        },
+        error => {
+          console.log('Getting posts failed', error);
+        }
+      );
+  }
+
+  getFollowed = () => {
+    this.http.get<User[]>(`${this.baseUrl}/api/dashboard/followed`)
+    .subscribe(
+      followed => {
+        this.data.setFollowed(followed);
+      },
+      error => {
+        console.log('Getting followed failed', error);
+      }
+    );
   }
 }

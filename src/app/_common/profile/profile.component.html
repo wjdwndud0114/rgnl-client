@@ -9,8 +9,7 @@
 
             <mat-form-field [style.display]="isProducer ? 'block' : 'none'" appearance="outline">
                 <mat-label>Short Description</mat-label>
-                <textarea rows="2" matInput type="text" formControlName="shortDescription"
-                    value="{{user.Profile && user.Profile.ShortDescription}}"></textarea>
+                <textarea rows="2" matInput type="text" formControlName="shortDescription"></textarea>
                 <mat-error *ngIf="f.shortDescription.errors">
                     <div *ngIf="f.shortDescription.errors.maxlength">Cannot exceed 300 characters</div>
                 </mat-error>
@@ -18,28 +17,27 @@
 
             <mat-form-field [style.display]="isProducer ? 'block' : 'none'" appearance="outline">
                 <mat-label>Long Description</mat-label>
-                <textarea rows="4" matInput type="text" formControlName="longDescription"
-                    value="{{user.Profile && user.Profile.LongDescription}}"></textarea>
+                <textarea rows="4" matInput type="text" formControlName="longDescription"></textarea>
             </mat-form-field>
 
             <mat-form-field [style.display]="isProducer ? 'block' : 'none'" appearance="outline">
                 <mat-label>Tags</mat-label>
-                <input matInput type="text" formControlName="tags" value="{{user.Profile && user.Profile.Tags}}" />
+                <input matInput type="text" formControlName="tags" />
             </mat-form-field>
 
             <mat-form-field [style.display]="isProducer ? 'block' : 'none'" appearance="outline">
                 <mat-label>Website</mat-label>
-                <input matInput type="text" formControlName="url" value="{{user.Profile && user.Profile.Url}}" />
+                <input matInput type="text" formControlName="url" />
             </mat-form-field>
 
             <mat-form-field [style.display]="isProducer ? 'block' : 'none'" appearance="outline">
                 <mat-label>Street</mat-label>
-                <input matInput type="text" formControlName="street" value="{{user.Profile && user.Profile.Street}}" />
+                <input matInput type="text" formControlName="street" />
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>City</mat-label>
-                <input matInput type="text" formControlName="city" value="{{user.Profile && user.Profile.City}}" />
+                <input matInput type="text" formControlName="city" />
                 <mat-error *ngIf="f.city.errors">
                     <div *ngIf="f.city.errors.required">City is required</div>
                 </mat-error>
@@ -48,8 +46,7 @@
             <div fxLayoutAlign="space-between center" class="state-zip">
                 <mat-form-field appearance="outline">
                     <mat-label>State</mat-label>
-                    <input matInput type="text" formControlName="state" [matAutocomplete]="stateAuto"
-                        value="{{user.Profile && user.Profile.State}}" />
+                    <input matInput type="text" formControlName="state" [matAutocomplete]="stateAuto" />
                     <mat-error *ngIf="f.state.errors">
                         <div *ngIf="f.state.errors.required">State is required</div>
                     </mat-error>
@@ -61,7 +58,7 @@
 
                 <mat-form-field appearance="outline">
                     <mat-label>Zip</mat-label>
-                    <input matInput type="text" formControlName="zip" value="{{user.Profile && user.Profile.Zip}}" />
+                    <input matInput type="text" formControlName="zip" />
                     <mat-error *ngIf="f.zip.errors">
                         <div *ngIf="f.zip.errors.required">Zip is required</div>
                     </mat-error>
@@ -130,7 +127,7 @@
             <mat-card-actions>
                 <div fxLayout="row" fxLayoutAlign="end center">
                     <button mat-raised-button type="button" class="wave-effect large-font button" color="primary"
-                        (click)="isEditMode = true; f.state.setValue(user.Profile.State)">Edit</button>
+                        (click)="isEditMode = true; reset()">Edit</button>
                 </div>
 
                 <mat-spinner *ngIf="loading"></mat-spinner>

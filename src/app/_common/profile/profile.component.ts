@@ -33,24 +33,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.profileForm = this.formBuilder.group({
-      shortDescription: ['', [Validators.maxLength(300)]],
-      longDescription: ['', []],
-      tags: ['', []],
-      url: ['', []],
-      street: ['', []],
-      city: ['', [Validators.required]],
-      state: ['', [Validators.required]],
-      zip: ['', [Validators.required]],
-      // firstName: ['', [Validators.required, Validators.maxLength(50)]],
-      // lastName: ['', [Validators.required, Validators.maxLength(50)]]
-    });
-
-    this.filteredStates = this.f.state.valueChanges.pipe(
-      takeUntil(this.destroyed),
-      map(value => this.states.filter(state => state.toLowerCase().includes(value.toLowerCase())))
-    );
-
     this.data.user.pipe(takeUntil(this.destroyed))
     .subscribe(
       user => {
@@ -70,6 +52,24 @@ export class ProfileComponent implements OnInit, OnDestroy {
         }
       }
     );
+
+    this.profileForm = this.formBuilder.group({
+      shortDescription: ['', [Validators.maxLength(300)]],
+      longDescription: ['', []],
+      tags: ['', []],
+      url: ['', []],
+      street: ['', []],
+      city: ['', [Validators.required]],
+      state: ['', [Validators.required]],
+      zip: ['', [Validators.required]],
+      // firstName: ['', [Validators.required, Validators.maxLength(50)]],
+      // lastName: ['', [Validators.required, Validators.maxLength(50)]]
+    });
+
+    this.filteredStates = this.f.state.valueChanges.pipe(
+      takeUntil(this.destroyed),
+      map(value => this.states.filter(state => state.toLowerCase().includes(value.toLowerCase())))
+    );
   }
 
   ngOnDestroy() {
@@ -88,6 +88,20 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
   }
 
+  reset () {
+    this.profileForm.reset({
+      shortDescription: (this.user.Profile && this.user.Profile.ShortDescription) || '',
+      longDescription: (this.user.Profile && this.user.Profile.LongDescription) || '',
+      tags: (this.user.Profile && this.user.Profile.Tags) || '',
+      url: (this.user.Profile && this.user.Profile.Url) || '',
+      street: (this.user.Profile && this.user.Profile.Street) || '',
+      city: (this.user.Profile && this.user.Profile.City) || '',
+      state: (this.user.Profile && this.user.Profile.State) || '',
+      zip: (this.user.Profile && this.user.Profile.Zip) || ''
+    });
+    this.error = '';
+  }
+
   updateProfile () {
     if (this.profileForm.invalid) {
       return;
@@ -97,8 +111,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.userService.updateProfile({
       AppUserId: this.user.Id,
       City: this.f.city.value,
+      ShortDescription: this.f.shortDescription.value,
       LongDescription: this.f.longDescription.value,
-      ShortDescription: this.f.longDescription.value,
       ProfileId: (this.user.Profile && this.user.Profile.ProfileId) || 0,
       State: this.f.state.value,
       Street: this.f.street.value,

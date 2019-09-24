@@ -17,6 +17,8 @@ import { AdminDashboardComponent } from './_pages/admin-dashboard/admin-dashboar
 import { ErrorInterceptor, JwtInterceptor } from './_helpers';
 import { SingleCardViewComponent } from './_pages/single-card-view/single-card-view.component';
 import { SideContentComponent } from './_pages/dashboard/side-content/side-content.component';
+import { PostsComponent } from './_common/posts/posts.component';
+import { PostComponent } from './_common/posts/post/post.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { SideContentComponent } from './_pages/dashboard/side-content/side-conte
     AdminDashboardComponent,
     SingleCardViewComponent,
     SideContentComponent,
+    PostsComponent,
+    PostComponent,
   ],
   imports: [
     HttpClientModule,
