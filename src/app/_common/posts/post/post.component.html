@@ -35,7 +35,7 @@
 
 
             <mat-card-subtitle>{{post.AppUser.FirstName}} {{post.AppUser.LastName}} -
-                {{post.CreatedDate | date:'M/d/y h:mma'}}</mat-card-subtitle>
+                {{post.CreatedDate + (post.CreatedDate.indexOf('Z') > 0 ? '' : 'Z') | date:'M/d/y h:mma'}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content *ngIf="!isEditing">{{post.Content}}</mat-card-content>
         <mat-card-content *ngIf="isEditing">
