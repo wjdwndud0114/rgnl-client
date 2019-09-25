@@ -95,6 +95,14 @@ export class UserService {
     return this.http.post(`${this.baseUrl}/odata/Post`, post);
   }
 
+  deletePost = (postId: number) => {
+    return this.http.delete(`${this.baseUrl}/odata/Post(${postId})`);
+  }
+
+  updatePost = (post: Post) => {
+    return this.http.patch(`${this.baseUrl}/odata/Post(${post.PostId})`, post);
+  }
+
   getPosts = () => {
     this.http.get<Post[]>(`${this.baseUrl}/api/dashboard/posts`)
       .subscribe(

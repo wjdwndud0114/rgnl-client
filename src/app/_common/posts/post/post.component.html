@@ -1,9 +1,53 @@
 <mat-card>
-    <img width="50px" src="{{post.AppUser.PictureUrl || 'assets/default_profile.png'}}" />
-    <label>{{post.Title}}</label>
-    <span>{{post.Content}}</span>
-    <span>{{post.CreatedDate}}</span>
-    <span>{{post.AppUser.FirstName}}</span>
-    <span>{{post.AppUser.LastName}}</span>
-    <span>{{post.AppUser.Email}}</span>
+    <form [formGroup]="postForm" (ngSubmit)="updatePost()">
+        <mat-card-header fxLayout="row">
+            <img mat-card-avatar src="{{post.AppUser.PictureUrl || 'assets/default_profile.png'}}" />
+            <mat-card-title *ngIf="!isEditing">{{post.Title}}</mat-card-title>
+            <mat-card-title *ngIf="isEditing">
+                <mat-form-field *ngIf="isEditing" floatLabel="never">
+                    <input matInput type="text" formControlName="title" placeholder="Title" />
+                    <mat-error *ngIf="f.title.errors">
+                        <div *ngIf="f.title.errors.required">Title is required</div>
+                        <div *ngIf="f.title.errors.maxlength">Title cannot exceed 100 characters</div>
+                    </mat-error>
+                </mat-form-field>
+            </mat-card-title>
+
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="isEditing=true; reset()">Edit</button>
+                <button mat-menu-item (click)="onRemove.emit(post.PostId)">Delete</button>
+            </mat-menu>
+
+            <button *ngIf="post.AppUserId == userId && !isEditing" [style.margin-left]="'auto'" mat-icon-button
+                [matMenuTriggerFor]="menu">
+                <i class="fas fa-ellipsis-v"></i>
+            </button>
+
+            <div *ngIf="post.AppUserId == userId && isEditing" [style.margin-left]="'auto'">
+                <button mat-icon-button type="button" (click)="isEditing=false">
+                    <i class="fas fa-times"></i>
+                </button>
+
+                <button mat-icon-button type="button" (click)="updatePost()">
+                    <i class="fas fa-check"></i>
+                </button>
+            </div>
+
+
+            <mat-card-subtitle>{{post.AppUser.FirstName}} {{post.AppUser.LastName}} -
+                {{post.CreatedDate | date:'M/d/y h:mma'}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content *ngIf="!isEditing">{{post.Content}}</mat-card-content>
+        <mat-card-content *ngIf="isEditing">
+            <mat-form-field *ngIf="isEditing" floatLabel="never">
+                <textarea matInput type="text" class="large-font" formControlName="content" rows="3"
+                    placeholder="Content"></textarea>
+                <mat-error *ngIf="f.content.errors">
+                    <div *ngIf="f.content.errors.required">Content is required</div>
+                    <div *ngIf="f.content.errors.content">Please enter a valid content</div>
+                    <div *ngIf="f.content.errors.maxlength">Content exceeds the maximum length</div>
+                </mat-error>
+            </mat-form-field>
+        </mat-card-content>
+    </form>
 </mat-card>

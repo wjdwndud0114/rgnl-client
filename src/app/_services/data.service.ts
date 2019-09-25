@@ -71,13 +71,15 @@ export class DataService {
     this._posts.next(this.dataStore.posts);
   }
 
-  public removePost (post: Post) {
-    this.dataStore.posts.splice(this.dataStore.posts.indexOf(post), 1);
+  public removePost (postId: number) {
+    const i = this.dataStore.posts.findIndex(p => p.PostId === postId);
+    this.dataStore.posts.splice(i, 1);
     this._posts.next(this.dataStore.posts);
   }
 
   public updatePost (post: Post) {
     const i = this.dataStore.posts.findIndex(p => p.PostId === post.PostId);
+    console.log("Updating", this.dataStore.posts[i], post);
     this.dataStore.posts[i] = post;
     this._posts.next(this.dataStore.posts);
   }

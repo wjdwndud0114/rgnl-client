@@ -11,7 +11,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class LiveService {
   private destroyed: Subject<void> = new Subject();
-  private followedIds: number[];
+  private followedIds: number[] = [];
   private userId: number;
   private hub: HubConnection = new HubConnectionBuilder()
     .withUrl(`${environment.baseUrl}/hub`)
@@ -21,7 +21,7 @@ export class LiveService {
     this.hub
       .start()
       .then(() => {
-        console.log('Connected for live updates')
+        console.log('Connected for live updates');
         this.userId = userId;
         this.hub.invoke('AddToGroup', userId.toString());
         this.data.followed.pipe(takeUntil(this.destroyed))
@@ -66,8 +66,8 @@ export class LiveService {
     this.hub.on('postedited', (post: Post) => {
       this.data.updatePost(post);
     });
-    this.hub.on('postdeleted', (post: Post) => {
-      this.data.removePost(post);
+    this.hub.on('postdeleted', (postId: number) => {
+      this.data.removePost(postId);
     });
   }
 }

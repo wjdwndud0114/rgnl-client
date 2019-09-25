@@ -3,7 +3,7 @@ import { Subject, Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/_services/user.service';
-import { takeUntil, startWith, map } from 'rxjs/operators';
+import { takeUntil, map } from 'rxjs/operators';
 import { DataService } from 'src/app/_services/data.service';
 import { User, Profile } from 'src/app/_models';
 

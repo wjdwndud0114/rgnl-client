@@ -91,4 +91,30 @@ export class PostsComponent implements OnInit, OnDestroy {
       }
     );
   }
+
+  onUpdatePost(post: Post) {
+    this.userService.updatePost(post).subscribe(
+      result => {
+        console.log(`Post ${post.PostId} update succeeded`);
+        // TODO: loading indication, growler maybe
+      },
+      error => {
+        console.log(`Post ${post.PostId} update failed`);
+        // TODO: loading indication, growler maybe
+      }
+    );
+  }
+
+  onDeletePost(postId: number) {
+    this.userService.deletePost(postId).subscribe(
+      result => {
+        console.log(`Post ${postId} delete succeeded`);
+        // TODO: loading indication, growler maybe
+      },
+      error => {
+        console.log(`Post ${postId} delete failed`);
+        // TODO: loading indication, growler maybe
+      }
+    );
+  }
 }
