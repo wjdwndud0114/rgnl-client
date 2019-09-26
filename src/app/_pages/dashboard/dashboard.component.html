@@ -17,7 +17,7 @@
     </mat-toolbar>
 
     <mat-sidenav-container class="container">
-        <mat-sidenav #snav [opened]="!mobileQuery.matches" [mode]="mobileQuery.matches ? 'over' : 'side'">
+        <mat-sidenav #snav [opened]="!mobileQuery.matches" [mode]="mobileQuery.matches ? 'over' : 'side'" [class.mobile]="mobileQuery.matches">
             <div fxLayout="column" fxLayoutAlign="center center">
                 Welcome, {{user.FirstName}}! {{user.Email}}
                 <img width="200px" [src]="user.PictureUrl || 'assets/default_profile.png'" />
@@ -26,7 +26,22 @@
             <app-profile></app-profile>
         </mat-sidenav>
         <mat-sidenav-content fxFlex="1 1 auto" fxLayoutAlign="center start">
-            <app-posts fxFlex="1 1 auto" fxFlexFill></app-posts>
+            <mat-tab-group fxFlex="1 1 auto" fxFlexFill>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <i class="fas fa-comments"></i>
+                        Posts
+                    </ng-template>
+                    <app-posts fxFlex="1 1 auto" fxFlexFill></app-posts>
+                </mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <i class="fas fa-users"></i>
+                        Governments
+                    </ng-template>
+                    <app-govs fxFlex="1 1 auto" fxFlexFill></app-govs>
+                </mat-tab>
+            </mat-tab-group>
         </mat-sidenav-content>
     </mat-sidenav-container>
 </div>

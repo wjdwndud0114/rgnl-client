@@ -8,6 +8,10 @@
     right: 0;
 }
 
+::ng-deep .mat-tab-labels {
+    justify-content: center;
+}
+
  mat-sidenav-container {
         display: flex;
         height: 100%;
@@ -15,6 +19,13 @@
 
         mat-sidenav {
             min-width: 300px;
-            width: 33%;
+            max-width: 450px;
+            width: 30%;
+        }
+        mat-sidenav.mobile {
+            width: 80%;
+        }
+        mat-tab-group .fas {
+            margin-right: 8px;
         }
     }

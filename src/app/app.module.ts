@@ -19,6 +19,8 @@ import { SingleCardViewComponent } from './_pages/single-card-view/single-card-v
 import { SideContentComponent } from './_pages/dashboard/side-content/side-content.component';
 import { PostsComponent } from './_common/posts/posts.component';
 import { PostComponent } from './_common/posts/post/post.component';
+import { GovsComponent } from './_common/govs/govs.component';
+import { GovComponent } from './_common/govs/gov/gov.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { PostComponent } from './_common/posts/post/post.component';
     SideContentComponent,
     PostsComponent,
     PostComponent,
+    GovsComponent,
+    GovComponent,
   ],
   imports: [
     HttpClientModule,
