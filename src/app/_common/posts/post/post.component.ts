@@ -14,7 +14,7 @@ export class PostComponent implements OnInit {
   @Output() remove: EventEmitter<any> = new EventEmitter();
   @Input() post: Post;
   @Input() userId: number;
-  private isEditing = false;
+  isEditing = false;
   postForm: FormGroup;
 
   get f (): FormGroup['controls'] { return this.postForm.controls; }

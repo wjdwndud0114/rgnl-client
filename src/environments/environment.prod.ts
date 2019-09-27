@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://99.101.10.143/rgnl',
+  baseUrl: 'http://198.89.112.8',
   fbClient: '2840955259264862',
 };
