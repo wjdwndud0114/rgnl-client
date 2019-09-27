@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { DataService } from 'src/app/_services/data.service';
 import { Subject } from 'rxjs';
 import { LiveService } from 'src/app/_services/live.service';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, skip } from 'rxjs/operators';
 import { Post, User } from 'src/app/_models';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { UserService } from 'src/app/_services/user.service';
@@ -39,7 +39,6 @@ export class PostsComponent implements OnInit, OnDestroy {
     });
 
     this.userService.getFollowed();
-    this.userService.getPosts();
 
     this.data.posts.pipe(takeUntil(this.destroyed))
       .subscribe(
@@ -57,6 +56,13 @@ export class PostsComponent implements OnInit, OnDestroy {
           }
         }
       );
+
+    this.data.followed.pipe(skip(1), takeUntil(this.destroyed))
+    .subscribe (
+      followed => {
+        this.userService.getPosts();
+      }
+    );
 
     this.liveService.start(this.user.Id);
   }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { User } from 'src/app/_models';
 
 @Component({
   selector: 'app-gov',
@@ -6,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./gov.component.scss']
 })
 export class GovComponent implements OnInit {
+  @Output() follow: EventEmitter<any> = new EventEmitter();
+  @Output() unfollow: EventEmitter<any> = new EventEmitter();
+  @Input() gov: User;
+  @Input() userId: number;
+  @Input() followed: boolean;
 
   constructor() { }
 

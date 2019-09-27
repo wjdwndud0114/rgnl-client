@@ -10,8 +10,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   providers: [DatePipe]
 })
 export class PostComponent implements OnInit {
-  @Output() onUpdate: EventEmitter<any> = new EventEmitter();
-  @Output() onRemove: EventEmitter<any> = new EventEmitter();
+  @Output() update: EventEmitter<any> = new EventEmitter();
+  @Output() remove: EventEmitter<any> = new EventEmitter();
   @Input() post: Post;
   @Input() userId: number;
   private isEditing = false;
@@ -44,7 +44,7 @@ export class PostComponent implements OnInit {
       return;
     }
 
-    this.onUpdate.emit({
+    this.update.emit({
       Title: this.f.title.value,
       Content: this.f.content.value,
       PostId: this.post.PostId,

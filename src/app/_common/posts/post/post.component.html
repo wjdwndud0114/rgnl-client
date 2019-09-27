@@ -15,7 +15,7 @@
 
             <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="isEditing=true; reset()">Edit</button>
-                <button mat-menu-item (click)="onRemove.emit(post.PostId)">Delete</button>
+                <button mat-menu-item (click)="remove.emit(post.PostId)">Delete</button>
             </mat-menu>
 
             <button *ngIf="post.AppUserId == userId && !isEditing" [style.margin-left]="'auto'" mat-icon-button

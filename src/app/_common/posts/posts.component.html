@@ -37,5 +37,5 @@
         </mat-card-content>
     </mat-card>
 
-    <app-post *ngFor="let post of posts" [post]="post" [userId]="user.Id" (onUpdate)="onUpdatePost($event)" (onRemove)="onDeletePost($event)"></app-post>
+    <app-post *ngFor="let post of posts" [post]="post" [userId]="user.Id" (update)="onUpdatePost($event)" (remove)="onDeletePost($event)"></app-post>
 </div>

@@ -1,1 +1,6 @@
-<p>govs works!</p>
+<!-- <div fxFlex fxLayout="row wrap" class="govs-container">
+    <app-gov fxLayout="row" fxFlex="calc(50% - 15px)" *ngFor="let gov of govs" [gov]="gov" (follow)="onFollow($event)" (unFollow)="onUnfollow($event)"></app-gov>
+</div> -->
+<div gdColumns="repeat(auto-fill, minmax(300px, 1fr))" gdGap="15px" class="govs-container">
+    <app-gov fxLayout="row" *ngFor="let gov of govs" [gov]="gov" [userId]="user.Id" [followed]="followedIds.includes(gov.Id)" (follow)="onFollow($event)" (unfollow)="onUnfollow($event)"></app-gov>
+</div>

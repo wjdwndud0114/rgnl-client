@@ -126,4 +126,40 @@ export class UserService {
       }
     );
   }
+
+  getGovs = () => {
+    this.http.get<User[]>(`${this.baseUrl}/api/dashboard/govs`)
+    .subscribe(
+      govs => {
+        this.data.setGovs(govs);
+      },
+      error => {
+        console.log('Getting followed failed', error);
+      }
+    );
+  }
+
+  followUser = (govId: number) => {
+    this.http.post(`${this.baseUrl}/api/dashboard/follow/${govId}`, {})
+    .subscribe(
+      data => {
+        this.data.addFollowed(govId);
+      },
+      error => {
+        console.log('Follow failed', error);
+      }
+    );
+  }
+
+  unfollowUser = (govId: number) => {
+    this.http.post(`${this.baseUrl}/api/dashboard/unfollow/${govId}`, {})
+    .subscribe(
+      data => {
+        this.data.removeFollowed(govId);
+      },
+      error => {
+        console.log('Unfollow failed', error);
+      }
+    );
+  }
 }

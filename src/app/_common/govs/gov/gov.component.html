@@ -1,1 +1,23 @@
-<p>gov works!</p>
+<mat-card>
+    <mat-card-header fxLayout="row">
+        <img mat-card-avatar src="{{gov.PictureUrl || 'assets/default_profile.png'}}" />
+        <mat-card-title>{{gov.FirstName}} {{gov.LastName}}</mat-card-title>
+        <mat-card-subtitle>{{gov.Email}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        {{gov.Profile.ShortDescription}}
+        <p>
+            {{gov.Profile.City}}, {{gov.Profile.State}} {{gov.Profile.Zip}}
+        </p>
+        <mat-card-actions>
+            <div *ngIf="gov.Id != userId; else isUserAlert" fxLayout="row" fxLayoutAlign="end center">
+                <button mat-raised-button type="button" class="wave-effect large-font button"
+                    (click)="followed ? unfollow.emit(gov.Id) : follow.emit(gov.Id)"
+                    color="primary">{{followed ? 'Unfollow' : 'Follow'}}</button>
+            </div>
+            <ng-template #isUserAlert>
+                This is you!
+            </ng-template>
+        </mat-card-actions>
+    </mat-card-content>
+</mat-card>
